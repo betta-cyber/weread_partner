@@ -8,7 +8,9 @@
 // @icon         https://rescdn.qqmail.com/node/wr/wrpage/style/images/independent/favicon/favicon_32h.png
 // @require      https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js
 // @grant        GM_addStyle
-// @run-at       document-start
+// @grant        GM_setValue
+// @grant        GM_getValue
+// @run-at       document-end
 // @license MIT
 // ==/UserScript==
 
@@ -17,20 +19,18 @@
 
     /* globals jQuery, $, waitForKeyElements */
 
+    // GM_setValue("custom_font", 'fantasy');
+    // todo
+    // add button to set GM_setValue
 
-    let windowTop = 0;
-    console.log($);
-    $(window).scroll(() => {
-        const scrollS = $(this).scrollTop();
-        if (scrollS >= windowTop + 120) {
-            $(".readerTopBar").fadeOut();
-            windowTop = scrollS;
-        }
-        else if (scrollS < windowTop) {
-            $(".readerTopBar").fadeIn();
-            windowTop = scrollS;
-        }
-    });
+    var custom_font = (GM_getValue("custom_font"));
+    console.log(custom_font);
+    var font_css
+    if (custom_font) {
+        font_css = "*{font-family: " + custom_font + ", LXGWWenKai, SourceHanSerifCN-Medium, Kaiti, STKaiti, FangSong, SimSun; !important;}";
+    } else {
+        font_css = "*{font-family:LXGWWenKai, SourceHanSerifCN-Medium, Kaiti, STKaiti, FangSong, SimSun; !important;}";
+    }
 
     var css = [
         ".readerContent {",
@@ -43,8 +43,9 @@
         "    max-width: 100% !important;",
         "}",
         ".readerControls {",
-        "    left: 95% !important;;",
-        "    margin-left: 0 !important;",
+        "    right: 0 !important;;",
+        "    margin-right: 15px !important;",
+        "    left: unset !important;",
         "}",
         ".reader_pdf_outline {",
         "    right: 0 !important;",
@@ -59,7 +60,7 @@
         "    left: unset !important;",
         "}",
         // 调整字体
-        "*{font-family: LXGWWenKai, SourceHanSerifCN-Medium, Kaiti, STKaiti, FangSong, SimSun; !important;}",
+        font_css,
         ".readerTopBar_title {font-family: LXGWWenKai,SourceHanSerifCN-Bold; !important; font-weight:bold !important;}",
     ].join("\n");
     if (typeof GM_addStyle != "undefined") {
@@ -80,4 +81,21 @@
             document.documentElement.appendChild(node);
         }
     }
+
+    // 隐藏topbar
+    let windowTop = 0;
+    $(window).scroll(() => {
+        const scrollS = $(this).scrollTop();
+        if (scrollS >= windowTop + 120) {
+            $(".readerTopBar").fadeOut();
+            windowTop = scrollS;
+        }
+        else if (scrollS < windowTop) {
+            $(".readerTopBar").fadeIn();
+            windowTop = scrollS;
+        }
+    });
+
+    // 隐藏下载按钮
+    $(".download").hide();
 })();
