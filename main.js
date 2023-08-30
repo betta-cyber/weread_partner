@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         微信阅读伙伴
 // @namespace    betta-cyber - Overview
-// @version      0.1
+// @version      0.1.1
 // @description  微信阅读好伙伴
 // @author       betta-cyber
 // @match        https://weread.qq.com/*
@@ -27,9 +27,9 @@
     console.log(custom_font);
     var font_css
     if (custom_font) {
-        font_css = "*{font-family: " + custom_font + ", LXGWWenKai, SourceHanSerifCN-Medium, Kaiti, STKaiti, FangSong, SimSun; !important;}";
+        font_css = "*{font-family: " + custom_font + ", LXGWWenKai, SourceHanSerifCN-Medium, Kaiti, STKaiti, FangSong, SimSun !important;}";
     } else {
-        font_css = "*{font-family:LXGWWenKai, SourceHanSerifCN-Medium, Kaiti, STKaiti, FangSong, SimSun; !important;}";
+        font_css = "*{font-family:LXGWWenKai, SourceHanSerifCN-Medium, Kaiti, STKaiti, FangSong, SimSun !important;}";
     }
 
     var css = [
