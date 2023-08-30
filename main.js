@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         微信阅读伙伴
-// @namespace    https://github.com/betta-cyber
+// @namespace    betta-cyber - Overview
 // @version      0.1
-// @description  try to take over the world!
+// @description  微信阅读好伙伴
 // @author       betta-cyber
 // @match        https://weread.qq.com/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=qq.com
+// @icon         https://rescdn.qqmail.com/node/wr/wrpage/style/images/independent/favicon/favicon_32h.png
 // @require      https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js
-// @grant        none
-// @run-at       document-end
+// @grant        GM_addStyle
+// @run-at       document-start
 // @license MIT
 // ==/UserScript==
 
@@ -16,6 +16,7 @@
     ("use strict");
 
     /* globals jQuery, $, waitForKeyElements */
+
 
     let windowTop = 0;
     console.log($);
@@ -32,31 +33,34 @@
     });
 
     var css = [
-    ".readerContent {",
-	"    max-width: 100% !important;",
-	"}",
-    ".app_content  {",
-	"    max-width: 100% !important;",
-	"}",
-	".readerTopBar {",
-	"    max-width: 100%;",
-	"}",
-    ".readerControls {",
-	"    left: 95%;",
-    "    margin-left: 0",
-	"}",
-    ".reader_pdf_outline {",
-	"    right: 0;",
-    "    left: unset;",
-	"}",
-    ".readerNotePanel {",
-	"    right: 0;",
-    "    left: unset;",
-	"}",
-    ".readerCatalog {",
-	"    right: 0;",
-    "    left: unset;",
-	"}",
+        ".readerContent {",
+        "    max-width: 100% !important;",
+        "}",
+        ".app_content  {",
+        "    max-width: 100% !important;",
+        "}",
+        ".readerTopBar {",
+        "    max-width: 100% !important;",
+        "}",
+        ".readerControls {",
+        "    left: 95% !important;;",
+        "    margin-left: 0 !important;",
+        "}",
+        ".reader_pdf_outline {",
+        "    right: 0 !important;",
+        "    left: unset !important;",
+        "}",
+        ".readerNotePanel {",
+        "    right: 0 !important;",
+        "    left: unset !important;",
+        "}",
+        ".readerCatalog {",
+        "    right: 0 !important;",
+        "    left: unset !important;",
+        "}",
+        // 调整字体
+        "*{font-family: LXGWWenKai, SourceHanSerifCN-Medium, Kaiti, STKaiti, FangSong, SimSun; !important;}",
+        ".readerTopBar_title {font-family: LXGWWenKai,SourceHanSerifCN-Bold; !important; font-weight:bold !important;}",
     ].join("\n");
     if (typeof GM_addStyle != "undefined") {
         GM_addStyle(css);
